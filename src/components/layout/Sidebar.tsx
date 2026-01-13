@@ -39,11 +39,37 @@ interface NavItemProps {
   children?: { to: string; label: string }[];
 }
 
-const NavItem: React.FC<NavItemProps> = ({ to, icon, label, badge, children }) => {
+interface SidebarProps {
+  collapsed?: boolean;
+  onToggleCollapse?: () => void;
+}
+
+const NavItem: React.FC<NavItemProps & { collapsed?: boolean }> = ({ to, icon, label, badge, children, collapsed }) => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const isActive = location.pathname === to || location.pathname.startsWith(to + '/');
   const hasChildren = children && children.length > 0;
+
+  if (collapsed) {
+    return (
+      <NavLink
+        to={hasChildren ? children[0].to : to}
+        className={({ isActive }) =>
+          cn(
+            'flex items-center justify-center p-2 rounded-lg text-sidebar-muted group relative',
+            'hover:bg-sidebar-accent hover:text-sidebar-foreground transition-all duration-200',
+            isActive && 'bg-sidebar-accent text-sidebar-foreground'
+          )
+        }
+        title={label}
+      >
+        {icon}
+        {badge && (
+          <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-secondary" />
+        )}
+      </NavLink>
+    );
+  }
 
   if (hasChildren) {
     return (
@@ -105,7 +131,7 @@ const NavItem: React.FC<NavItemProps> = ({ to, icon, label, badge, children }) =
   );
 };
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC<SidebarProps> = ({ collapsed = false, onToggleCollapse }) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -185,45 +211,66 @@ const Sidebar: React.FC = () => {
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed lg:static inset-y-0 left-0 z-40 w-72 bg-sidebar-bg flex flex-col overflow-hidden transition-transform duration-300',
+          'fixed lg:static inset-y-0 left-0 z-40 bg-sidebar-bg flex flex-col overflow-hidden transition-all duration-300',
+          collapsed ? 'w-20' : 'w-72',
           'lg:translate-x-0',
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
         {/* Logo */}
-        <div className="flex items-center gap-3 px-6 py-5 border-b border-sidebar-border">
-          <img src="/ame-logo.png" alt="AME Zion logo" className="h-12 w-12 object-contain" />
-          <div>
-            <h1 className="text-lg font-bold text-sidebar-foreground font-display">AME Zion</h1>
-            <p className="text-xs text-sidebar-muted">Church Management</p>
-          </div>
+        <div className={cn(
+          "flex items-center gap-3 px-4 py-5 border-b border-sidebar-border",
+          collapsed ? "justify-center" : "px-6"
+        )}>
+          <img src="/logo-new.avif" alt="AME Zion logo" className="h-10 w-10 object-contain" />
+          {!collapsed && (
+            <div className="flex-1 overflow-hidden">
+              <h1 className="text-lg font-bold text-sidebar-foreground font-display truncate">Church Management</h1>
+              <p className="text-xs text-sidebar-muted truncate">Church Management</p>
+            </div>
+          )}
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto scrollbar-thin">
+        <nav className="flex-1 px-3 py-6 space-y-1.5 overflow-y-auto scrollbar-thin overflow-x-hidden">
           {navigation.map((item) => (
-            <NavItem key={item.to} {...item} />
+            <NavItem key={item.to} {...item} collapsed={collapsed} />
           ))}
         </nav>
 
+        {/* Collapse Toggle */}
+        <div className="hidden lg:flex justify-end p-4 border-t border-sidebar-border">
+          <button
+            onClick={onToggleCollapse}
+            className={cn("p-2 rounded-lg text-sidebar-muted hover:bg-sidebar-accent hover:text-sidebar-foreground transition-all", collapsed && "mx-auto")}
+          >
+            {collapsed ? <ChevronRight className="w-5 h-5" /> : <div className="flex items-center gap-2"><ChevronDown className="w-5 h-5 rotate-90" /><span className="text-xs font-medium uppercase">Minimize</span></div>}
+          </button>
+        </div>
+
         {/* User section */}
-        <div className="px-4 py-4 border-t border-sidebar-border">
-          <div className="flex items-center gap-3 px-3 py-2">
-            <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
+        <div className="px-3 py-4 border-t border-sidebar-border">
+          <div className={cn("flex items-center gap-3 px-2 py-2", collapsed && "justify-center")}>
+            <div className="h-10 w-10 min-w-[2.5rem] rounded-full bg-primary flex items-center justify-center text-primary-foreground font-semibold">
               JD
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-sidebar-foreground truncate">John Doe</p>
-              <p className="text-xs text-sidebar-muted truncate">Super Admin</p>
-            </div>
-            <button
-              onClick={() => setIsLogoutModalOpen(true)}
-              className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors"
-            >
-              <LogOut className="w-4 h-4 text-sidebar-muted" />
-            </button>
+            {!collapsed && (
+              <>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-sidebar-foreground truncate">John Doe</p>
+                  <p className="text-xs text-sidebar-muted truncate">Super Admin</p>
+                </div>
+                <button
+                  onClick={() => setIsLogoutModalOpen(true)}
+                  className="p-2 rounded-lg hover:bg-sidebar-accent transition-colors"
+                >
+                  <LogOut className="w-4 h-4 text-sidebar-muted" />
+                </button>
+              </>
+            )}
           </div>
         </div>
+
       </aside>
 
       {/* Logout Modal */}

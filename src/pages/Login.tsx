@@ -14,7 +14,7 @@ const Login: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     // Simulate login - replace with actual auth
     setTimeout(() => {
       setIsLoading(false);
@@ -31,13 +31,13 @@ const Login: React.FC = () => {
           <div className="absolute top-20 left-20 w-72 h-72 bg-secondary rounded-full blur-3xl" />
           <div className="absolute bottom-20 right-20 w-96 h-96 bg-primary rounded-full blur-3xl" />
         </div>
-        
+
         <div className="relative z-10 flex flex-col justify-between p-12 text-primary-foreground">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <img src="/ame-logo.png" alt="AME Zion logo" className="h-14 w-14 object-contain" />
+            <img src="/logo-new.avif" alt="AME Zion logo" className="h-14 w-14 object-contain" />
             <div>
-              <h1 className="text-xl font-bold font-display">AME Zion Church</h1>
+              <h1 className="text-xl font-bold font-display">Church Management</h1>
               <p className="text-sm opacity-80">Ghana Conference</p>
             </div>
           </div>
@@ -48,10 +48,10 @@ const Login: React.FC = () => {
               Church Management System
             </h2>
             <p className="mt-6 text-lg opacity-90 leading-relaxed">
-              Empowering the African Methodist Episcopal Zion Church in Ghana with modern tools 
+              Empowering the Church Management in Ghana with modern tools
               for administration, finance, and community engagement.
             </p>
-            
+
             {/* Features */}
             <div className="mt-10 grid grid-cols-2 gap-6">
               {[
@@ -70,7 +70,7 @@ const Login: React.FC = () => {
 
           {/* Footer */}
           <p className="text-sm opacity-60">
-            © 2024 African Methodist Episcopal Zion Church - Ghana
+            © 2024 Church Management - Ghana
           </p>
         </div>
       </div>
@@ -80,9 +80,9 @@ const Login: React.FC = () => {
         <div className="w-full max-w-md animate-fade-in">
           {/* Mobile logo */}
           <div className="lg:hidden flex items-center justify-center gap-3 mb-8">
-            <img src="/ame-logo.png" alt="AME Zion logo" className="h-14 w-14 object-contain" />
+            <img src="/logo-new.avif" alt="AME Zion logo" className="h-14 w-14 object-contain" />
             <div>
-              <h1 className="text-xl font-bold font-display text-foreground">AME Zion</h1>
+              <h1 className="text-xl font-bold font-display text-foreground">Church Management</h1>
               <p className="text-sm text-muted-foreground">Ghana Conference</p>
             </div>
           </div>
