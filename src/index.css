@@ -1,0 +1,292 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AME Zion Church Ghana - Float UI Design System */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+@layer base {
+  :root {
+    /* Core Colors - Deep Navy & Gold Theme */
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    /* Primary - Deep Indigo/Navy */
+    --primary: 224 76% 25%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 224 76% 20%;
+    --primary-light: 224 76% 95%;
+    
+    /* Secondary - Warm Gold */
+    --secondary: 38 92% 50%;
+    --secondary-foreground: 222 47% 11%;
+    --secondary-light: 38 92% 95%;
+    
+    /* Accent - Teal */
+    --accent: 173 80% 40%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 173 80% 95%;
+    
+    /* Muted */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    
+    /* Success, Warning, Destructive */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --success-light: 142 76% 95%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 222 47% 11%;
+    --warning-light: 38 92% 95%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --destructive-light: 0 84% 95%;
+    
+    /* UI Elements */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 76% 25%;
+    --radius: 0.75rem;
+    
+    /* Sidebar */
+    --sidebar-bg: 224 47% 11%;
+    --sidebar-foreground: 220 20% 90%;
+    --sidebar-muted: 220 20% 70%;
+    --sidebar-accent: 224 76% 25%;
+    --sidebar-border: 224 47% 18%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(224 76% 25%) 0%, hsl(224 76% 35%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(38 92% 50%) 0%, hsl(38 92% 60%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(224 47% 11%) 0%, hsl(224 76% 25%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(220 20% 98%) 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 40px -10px hsl(224 76% 25% / 0.3);
+  }
+
+  .dark {
+    --background: 224 47% 8%;
+    --foreground: 220 20% 95%;
+    
+    --card: 224 47% 11%;
+    --card-foreground: 220 20% 95%;
+    
+    --popover: 224 47% 11%;
+    --popover-foreground: 220 20% 95%;
+    
+    --primary: 224 76% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 224 76% 60%;
+    --primary-light: 224 76% 15%;
+    
+    --muted: 224 47% 15%;
+    --muted-foreground: 220 9% 60%;
+    
+    --border: 224 47% 18%;
+    --input: 224 47% 18%;
+    --ring: 224 76% 55%;
+    
+    --sidebar-bg: 224 47% 6%;
+    --sidebar-border: 224 47% 12%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html, body, #root {
+    height: 100%;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Float UI Button Styles */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary-hover focus:ring-primary shadow-sm hover:shadow-md;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:opacity-90 focus:ring-secondary shadow-sm;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-border bg-transparent hover:bg-muted focus:ring-primary;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent hover:bg-muted focus:ring-primary;
+  }
+  
+  .btn-sm {
+    @apply px-3 py-1.5 text-sm;
+  }
+  
+  .btn-md {
+    @apply px-4 py-2.5 text-sm;
+  }
+  
+  .btn-lg {
+    @apply px-6 py-3 text-base;
+  }
+  
+  /* Float UI Card Styles */
+  .float-card {
+    @apply bg-card rounded-xl border border-border shadow-sm transition-all duration-200;
+  }
+  
+  .float-card-hover {
+    @apply hover:shadow-md hover:border-primary/20;
+  }
+  
+  /* Float UI Input Styles */
+  .float-input {
+    @apply w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+  }
+  
+  /* Stats Card */
+  .stat-card {
+    @apply float-card p-6 flex flex-col gap-2;
+  }
+  
+  .stat-value {
+    @apply text-3xl font-bold tracking-tight;
+  }
+  
+  .stat-label {
+    @apply text-sm text-muted-foreground font-medium;
+  }
+  
+  /* Sidebar Navigation */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-sidebar-muted hover:bg-sidebar-accent hover:text-sidebar-foreground transition-all duration-200 cursor-pointer;
+  }
+  
+  .nav-item-active {
+    @apply bg-sidebar-accent text-sidebar-foreground font-medium;
+  }
+  
+  .nav-group-title {
+    @apply text-xs font-semibold uppercase tracking-wider text-sidebar-muted/60 px-3 mb-2;
+  }
+  
+  /* Badge Styles */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .badge-primary {
+    @apply bg-primary-light text-primary;
+  }
+  
+  .badge-success {
+    @apply bg-success-light text-success;
+  }
+  
+  .badge-warning {
+    @apply bg-warning-light text-warning;
+  }
+  
+  .badge-destructive {
+    @apply bg-destructive-light text-destructive;
+  }
+  
+  /* Table Styles */
+  .float-table {
+    @apply w-full text-left;
+  }
+  
+  .float-table th {
+    @apply px-4 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground bg-muted/50 first:rounded-tl-lg last:rounded-tr-lg;
+  }
+  
+  .float-table td {
+    @apply px-4 py-4 border-t border-border;
+  }
+  
+  .float-table tr {
+    @apply hover:bg-muted/30 transition-colors;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 3px;
+  }
+}
